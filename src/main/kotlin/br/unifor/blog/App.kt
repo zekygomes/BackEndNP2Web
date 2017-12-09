@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
     //secure("""C:\web\keystore.jks""", "password", null, null)
 
     //### IMPORTANTE ### Por favor, Após a primeira execução, comente a próxima linha
-    //justPopulating()
+    justPopulating()
 
     path("/api", {
 
