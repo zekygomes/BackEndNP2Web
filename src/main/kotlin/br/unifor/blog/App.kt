@@ -120,7 +120,7 @@ fun main(args: Array<String>) {
         val hashedPassword = AuthController.hashPassword(userAdmin.email, userAdmin.password, userAdmin.salt)
         userAdmin.password = hashedPassword
         val ret = UserController.userDAO.create(userAdmin)
-
+        var i = 0
         do {
             val postTest = Post()
             postTest.content = "Some long text here, but im not in the mood right now to do, so Ill try do something more quickly."
