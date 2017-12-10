@@ -121,35 +121,23 @@ fun main(args: Array<String>) {
         userAdmin.password = hashedPassword
         val ret = UserController.userDAO.create(userAdmin)
 
-        val postTest = Post()
-        postTest.content = "Some long text here, but im not in the mood right now to do, so Ill try do something more quickly."
-        postTest.createdTime = dataHora
-        postTest.title = "Some text"
-        postTest.viewCount = "0"
-        postTest.author = userAdmin
-        val result = PostsController.postDAO.create(postTest)
+        do {
+            val postTest = Post()
+            postTest.content = "Some long text here, but im not in the mood right now to do, so Ill try do something more quickly."
+            postTest.createdTime = dataHora
+            postTest.title = "Some text"
+            postTest.viewCount = "0"
+            postTest.author = userAdmin
+            val result = PostsController.postDAO.create(postTest)
 
-        val commentTest = Comment()
-        commentTest.comment = "Some long text here, but im not in the mood right now to do, so i'm finish."
-        commentTest.createdTime = dataHora
-        commentTest.post = postTest
-        val result2 = CommentsController.commentDAO.create(commentTest)
+            val commentTest = Comment()
+            commentTest.comment = "Some long text here, but im not in the mood right now to do, so i'm finish."
+            commentTest.createdTime = dataHora
+            commentTest.post = postTest
+            val result2 = CommentsController.commentDAO.create(commentTest)
+            i++
+        }while(i < 5)
     }
 
-    private fun passwordProtection(path: String) {
-        val logger = LoggerFactory.getLogger("App")
-        before(path) { req, res ->
-            if (req.attribute<Any>("username") == null) {
-                logger.info("You must be signed in.")
-                res.redirect("/password")
-                halt()
-            }
 
-            if (req.attribute<Any>("username") != "admin") {
-                logger.info("Incorrect username.")
-                res.redirect("/password")
-                halt()
-            }
-        }
-    }
 
